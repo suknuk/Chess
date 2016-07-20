@@ -2,36 +2,58 @@ package pieces;
 
 import java.util.ArrayList;
 
-public interface Piece {
+import board.Board;
+import board.Move;
+
+public abstract class Piece implements PieceInterface{
+	
 	/*
-	 * Color of the piece
+	 * private X and Y positions of the piece
 	 */
-	enum color{
-		White,Black
+	private int posX;
+	private int posY;
+	
+	/*
+	 * private enum color variable
+	 */
+	private Color color;
+
+	/*
+	 * Constructor
+	 */
+	public Piece(int x, int y, Color color){
+		this.posX = x;
+		this.posY = y;
+		this.color = color;
 	}
-	
+
 	/*
-	 * Vertical position of the piece on the field
+	 * Getters for the position of the piece
 	 */
-	public int getPoisitonX();
-	
+	@Override
+	public int getPoisitonX() {
+		return this.posX;
+	}
+
+	@Override
+	public int getPositionY() {
+		return this.posY;
+	}
+
 	/*
-	 * Horizontal position of the piece on the field
+	 * (non-Javadoc)
+	 * @see pieces.PieceInterface#possibleMoves()
 	 */
-	public int getPositionY();
-	
+	@Override
+	public ArrayList<Move> possibleMoves(Board board) {
+		return null;
+	}
+
 	/*
-	 * Returning all possible moves this piece is able to do
+	 * Enum type of the piece's color
 	 */
-	public ArrayList<Move> possibleMoves();
-	
-	/*
-	 * True if the piece belongs to the white player
-	 */
-	public boolean isWhite();
-	
-	/*
-	 * True if the piece belongs to the black player
-	 */
-	public boolean isBlack();
+	@Override
+	public Color color(){
+		return this.color;
+	}
 }

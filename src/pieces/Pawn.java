@@ -2,66 +2,72 @@ package pieces;
 
 import java.util.ArrayList;
 
-public class Pawn implements Piece{
-	
-	/*
-	 * private X and Y positions of the piece
-	 */
-	private int posX;
-	private int posY;
-	
-	/*
-	 * private color variable
-	 * true = White
-	 * false = Black
-	 */
-	private boolean color;
+import board.Board;
+import board.Move;
+
+public class Pawn extends Piece {
 
 	/*
 	 * Constructor
 	 */
-	public Pawn(int x, int y, boolean color){
-		this.posX = x;
-		this.posY = y;
-		this.color = color;
+	public Pawn(int x, int y, Color color) {
+		super(x, y, color);
 	}
 
 	/*
-	 * Getters for the position of the piece
+	 * (non-Javadoc)
+	 * 
+	 * @see pieces.Piece#possibleMoves()
 	 */
 	@Override
-	public int getPoisitonX() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	public ArrayList<Move> possibleMoves(Board board) {
+		ArrayList<Move> moves = new ArrayList<Move>();
 
-	@Override
-	public int getPositionY() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+		/*
+		 * left top is A8 - board[0][0], hence white pawns go towards 0 and
+		 * black pawns toward 7
+		 */
+		int direction;
+		if (this.color() == Color.WHITE) {
+			direction = -1;
+		} else {
+			direction = 1;
+		}
 
-	@Override
-	public ArrayList<Move> possibleMoves() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		int toX;
+		int toY;
+		Piece piece;
 
-	/*
-	 * True if the piece belongs to the white player
-	 */
-	@Override
-	public boolean isWhite() {
-		return this.color;
-	}
+		/*
+		 * moving 1 step towards enemy
+		 */
+		toX = this.getPoisitonX();
+		toY = this.getPositionY() + direction;
+		piece = board.getPieceAt(toX, toY);
+		if (piece == null) {
+			new Move(this, board, toX, toY, moves);
+		}
 
-	/*
-	 * True if the piece belongs to the black player
-	 */
-	@Override
-	public boolean isBlack() {
-		return !(this.color);
-	}
+		/*
+		 * hitting left of the pawn
+		 */
+		toX = this.getPoisitonX() - 1;
+		toY = this.getPositionY() + direction;
+		piece = board.getPieceAt(toX, toY);
+		if (piece != null && (this.color() != piece.color())) {
+			new Move(this, board, toX, toY, moves);
+		}
 
-	
+		/*
+		 * hitting right of the pawn
+		 */
+		toX = this.getPoisitonX() + 1;
+		toY = this.getPositionY() + direction;
+		piece = board.getPieceAt(toX, toY);
+		if (piece != null && (this.color() != piece.color())) {
+			new Move(this, board, toX, toY, moves);
+		}
+
+		return moves;
+	}
 }
