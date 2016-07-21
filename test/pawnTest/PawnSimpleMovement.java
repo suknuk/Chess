@@ -12,7 +12,7 @@ import testSuite.TestMove;
  * Test class to check for the basic pawn movements
  */
 public class PawnSimpleMovement extends MainTestClass {
-	
+
 	/*
 	 * Following are single white movement checks without other pieces on the
 	 * board
@@ -87,8 +87,8 @@ public class PawnSimpleMovement extends MainTestClass {
 	public void simpleWhiteMoveBlockedByFriendlyPiece() {
 		this.reset();
 		Pawn pawn = new Pawn(4, 4, PieceColor.WHITE, board);
-		new Pawn(4, 3, PieceColor.WHITE,board);
-		
+		new Pawn(4, 3, PieceColor.WHITE, board);
+
 		// Expecting pawn can move nowhere
 		new TestExpectedMoves(board, pawn, testMoves);
 	}
@@ -97,8 +97,8 @@ public class PawnSimpleMovement extends MainTestClass {
 	public void simpleWhiteMoveBlockedByEnemyPiece() {
 		this.reset();
 		Pawn pawn = new Pawn(4, 4, PieceColor.WHITE, board);
-		new Pawn(4, 3, PieceColor.BLACK,board);
-		
+		new Pawn(4, 3, PieceColor.BLACK, board);
+
 		// Expecting pawn can move nowhere
 		new TestExpectedMoves(board, pawn, testMoves);
 	}
@@ -107,8 +107,8 @@ public class PawnSimpleMovement extends MainTestClass {
 	public void simpleBlackMoveBlockedByFriendlyPiece() {
 		this.reset();
 		Pawn pawn = new Pawn(4, 3, PieceColor.BLACK, board);
-		new Pawn(4, 4, PieceColor.BLACK,board);
-		
+		new Pawn(4, 4, PieceColor.BLACK, board);
+
 		// Expecting pawn can move nowhere
 		new TestExpectedMoves(board, pawn, testMoves);
 	}
@@ -117,8 +117,8 @@ public class PawnSimpleMovement extends MainTestClass {
 	public void simpleBlackMoveBlockedByEnemyPiece() {
 		this.reset();
 		Pawn pawn = new Pawn(4, 3, PieceColor.BLACK, board);
-		new Pawn(4, 4, PieceColor.WHITE,board);
-		
+		new Pawn(4, 4, PieceColor.WHITE, board);
+
 		// Expecting pawn can move nowhere
 		new TestExpectedMoves(board, pawn, testMoves);
 	}

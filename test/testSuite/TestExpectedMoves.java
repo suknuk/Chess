@@ -29,8 +29,8 @@ public class TestExpectedMoves {
 		this.piece = piece;
 		this.testMoves = testMoves;
 		this.moves = this.piece.possibleMoves(this.board);
-		
-		//do the test
+
+		// do the test
 		this.test();
 	}
 
@@ -38,12 +38,12 @@ public class TestExpectedMoves {
 	 * do all the testing
 	 */
 	@Test
-	public void test(){
+	public void test() {
 		/*
 		 * testing number of expected moves
 		 */
-		assertEquals(testMoves.size(),moves.size());
-		
+		assertEquals(testMoves.size(), moves.size());
+
 		// Iterating every move, takes O(n²) time
 		for (int i = 0; i < this.moves.size(); i++) {
 			Move move = moves.get(i);
@@ -51,24 +51,22 @@ public class TestExpectedMoves {
 			for (int j = 0; j < this.testMoves.size(); j++) {
 				TestMove tm = this.testMoves.get(j);
 				/*
-				 * entry was found -> correct -> iterate next entry in this.moves
+				 * entry was found -> correct -> iterate next entry in
+				 * this.moves
 				 */
-				if (move.toX() == tm.toX() && move.toY() == tm.toY()){
+				if (move.toX() == tm.toX() && move.toY() == tm.toY()) {
 					break;
 				} else {
 					/*
-					 * if entry was not found at the last iteration, the expected move does 
-					 * not exist in the moves found by the possibleMoves method, hence
-					 * throw an error
+					 * if entry was not found at the last iteration, the
+					 * expected move does not exist in the moves found by the
+					 * possibleMoves method, hence throw an error
 					 */
-					if (j == this.moves.size() - 1){
+					if (j == this.moves.size() - 1) {
 						fail("Expected move not found in possibleMoves method");
 					}
 				}
 			}
-			
-		} //end for
+		} // end for
 	}
-	
-
 }

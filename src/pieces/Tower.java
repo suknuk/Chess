@@ -13,6 +13,9 @@ public class Tower extends Piece {
 	public Tower(int x, int y, PieceColor color) {
 		super(x, y, color);
 	}
+	public Tower(int x, int y, PieceColor color, Board board){
+		super(x, y, color,board);
+	}
 
 	/*
 	 * (non-Javadoc)
