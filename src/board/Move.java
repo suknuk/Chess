@@ -4,38 +4,74 @@ import java.util.ArrayList;
 
 import pieces.Piece;
 
+/*
+ * This class deals with the movement of pieces on the chess board
+ */
 public class Move {
 
+	/*
+	 * private variables necessary for the class
+	 */
 	private Piece movingPiece;
 	private int toX;
 	private int toY;
 
-	public Move(Piece piece, Board board, int toX, int toY){
+	/*
+	 * constructor
+	 */
+	public Move(Piece piece, Board board, int toX, int toY) {
 		if (toX >= 0 && toX <= 7 && toY >= 0 && toY <= 7) {
 			this.movingPiece = piece;
 			this.toX = toX;
 			this.toY = toY;
-			System.out.println("new move from : " + piece.getClass() + ", from x: " + piece.getPoisitonX() + ", y: "
-					+ piece.getPositionY() + ", to x: " + toX + ", y: " + toY );
+
+			System.out.print("New move from : " + piece.getClass() + ", from x: " + piece.getPoisitonX() + ", y: "
+					+ piece.getPositionY() + ", to x: " + toX + ", y: " + toY);
+			/*
+			 * Moving to empty place
+			 */
+			Piece toPiece = board.getPieceAt(toX, toY);
+			if (toPiece == null) {
+				System.out.println(". Moved successfully");
+			}
+			/*
+			 * Moving to same color piece
+			 */
+			else if (toPiece.color() == piece.color()) {
+				System.out.println("Trying to move onto existing same color piece");
+				throw new java.lang.IllegalArgumentException();
+			}
+			/*
+			 * Hitting enemy piece
+			 */
+			else if (toPiece.color() != piece.color()){
+				System.out.println(". Enemy piece hit");
+			}
+		} else {
+			System.out.println("Trying to move out of board");
+			throw new java.lang.IllegalArgumentException();
 		}
 	}
-	
+
+	/*
+	 * constructor that adds the move automatically to an ArrayList<Move>
+	 */
 	public Move(Piece piece, Board board, int toX, int toY, ArrayList<Move> moves) {
-		this(piece,board,toX,toY);
+		this(piece, board, toX, toY);
 		moves.add(this);
 	}
 
 	/*
 	 * public getters
 	 */
-	public int toX(){
+	public int toX() {
 		return this.toX;
 	}
-	
-	public int toY(){
+
+	public int toY() {
 		return this.toY;
 	}
-	
+
 	public int fromX() {
 		return this.movingPiece.getPoisitonX();
 	}

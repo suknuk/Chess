@@ -43,9 +43,25 @@ public class Pawn extends Piece {
 		 */
 		toX = this.getPoisitonX();
 		toY = this.getPositionY() + direction;
-		piece = board.getPieceAt(toX, toY);
-		if (piece == null) {
-			new Move(this, board, toX, toY, moves);
+		if (toX >= 0 && toX <= 7 && toY >= 0 && toY <= 7) {
+			piece = board.getPieceAt(toX, toY);
+			if (piece == null) {
+				new Move(this, board, toX, toY, moves);
+			}
+		}
+
+		/*
+		 * moving 2 steps towards other player when pawn sits at starting
+		 * position this is true when: white pawn - y = 6, black pawn - y = 1
+		 */
+		if ((this.color() == PieceColor.BLACK && this.getPositionY() == 1)
+				|| (this.color() == PieceColor.WHITE && this.getPositionY() == 6)) {
+			toX = this.getPoisitonX();
+			toY = this.getPositionY() + 2 * direction;
+			piece = board.getPieceAt(toX, toY);
+			if (piece == null) {
+				new Move(this, board, toX, toY, moves);
+			}
 		}
 
 		/*
@@ -53,9 +69,11 @@ public class Pawn extends Piece {
 		 */
 		toX = this.getPoisitonX() - 1;
 		toY = this.getPositionY() + direction;
-		piece = board.getPieceAt(toX, toY);
-		if (piece != null && (this.color() != piece.color())) {
-			new Move(this, board, toX, toY, moves);
+		if (toX >= 0 && toX <= 7 && toY >= 0 && toY <= 7) {
+			piece = board.getPieceAt(toX, toY);
+			if (piece != null && (this.color() != piece.color())) {
+				new Move(this, board, toX, toY, moves);
+			}
 		}
 
 		/*
@@ -63,9 +81,11 @@ public class Pawn extends Piece {
 		 */
 		toX = this.getPoisitonX() + 1;
 		toY = this.getPositionY() + direction;
-		piece = board.getPieceAt(toX, toY);
-		if (piece != null && (this.color() != piece.color())) {
-			new Move(this, board, toX, toY, moves);
+		if (toX >= 0 && toX <= 7 && toY >= 0 && toY <= 7) {
+			piece = board.getPieceAt(toX, toY);
+			if (piece != null && (this.color() != piece.color())) {
+				new Move(this, board, toX, toY, moves);
+			}
 		}
 
 		return moves;
