@@ -56,7 +56,20 @@ public abstract class Piece implements PieceInterface{
 	public ArrayList<Move> possibleMoves(Board board) {
 		return null;
 	}
-
+	
+	/*
+	 * Moving a piece to a field
+	 */
+	public void hitMove(int toX, int toY, Board board, ArrayList<Move> moves){
+		// Boundary check
+		if (toX >= 0 && toX <= 7 && toY >= 0 && toY <= 7) {
+			Piece piece = board.getPieceAt(toX, toY);
+			if (piece == null || piece.color != this.color){
+				new Move(this, board, toX, toY, moves);
+			}
+		}
+	}
+	
 	/*
 	 * Enum type of the piece's color
 	 */
