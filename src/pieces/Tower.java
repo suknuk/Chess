@@ -10,7 +10,7 @@ public class Tower extends Piece {
 	/*
 	 * Constructor
 	 */
-	public Tower(int x, int y, Color color) {
+	public Tower(int x, int y, PieceColor color) {
 		super(x, y, color);
 	}
 

@@ -28,5 +28,5 @@ public interface PieceInterface {
 	/*
 	 * Enum type of the piece's color
 	 */
-	public Color color();
+	public PieceColor color();
 }

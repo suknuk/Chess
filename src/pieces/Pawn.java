@@ -10,7 +10,7 @@ public class Pawn extends Piece {
 	/*
 	 * Constructor
 	 */
-	public Pawn(int x, int y, Color color) {
+	public Pawn(int x, int y, PieceColor color) {
 		super(x, y, color);
 	}
 
@@ -28,7 +28,7 @@ public class Pawn extends Piece {
 		 * black pawns toward 7
 		 */
 		int direction;
-		if (this.color() == Color.WHITE) {
+		if (this.color() == PieceColor.WHITE) {
 			direction = -1;
 		} else {
 			direction = 1;

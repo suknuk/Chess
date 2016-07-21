@@ -32,6 +32,9 @@ public class Board {
 		return board[x][y];
 	}
 	
+	/*
+	 * Adding a piece to the board
+	 */
 	public void addPiece(Piece piece){
 		this.board[piece.getPoisitonX()][piece.getPositionY()] = piece;
 	}

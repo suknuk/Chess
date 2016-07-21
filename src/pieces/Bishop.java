@@ -10,7 +10,7 @@ public class Bishop extends Piece {
 	/*
 	 * Constructor
 	 */
-	public Bishop(int x, int y, Color color) {
+	public Bishop(int x, int y, PieceColor color) {
 		super(x, y, color);
 	}
 	

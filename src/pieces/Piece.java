@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import board.Board;
 import board.Move;
 
+/*
+ * Abstact class because 'new Piece' should be disallowed
+ */
 public abstract class Piece implements PieceInterface{
 	
 	/*
@@ -16,12 +19,12 @@ public abstract class Piece implements PieceInterface{
 	/*
 	 * private enum color variable
 	 */
-	private Color color;
+	private PieceColor color;
 
 	/*
 	 * Constructor
 	 */
-	public Piece(int x, int y, Color color){
+	public Piece(int x, int y, PieceColor color){
 		this.posX = x;
 		this.posY = y;
 		this.color = color;
@@ -53,7 +56,7 @@ public abstract class Piece implements PieceInterface{
 	 * Enum type of the piece's color
 	 */
 	@Override
-	public Color color(){
+	public PieceColor color(){
 		return this.color;
 	}
 }
