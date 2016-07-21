@@ -13,6 +13,10 @@ public class Pawn extends Piece {
 	public Pawn(int x, int y, PieceColor color) {
 		super(x, y, color);
 	}
+	
+	public Pawn(int x, int y, PieceColor color,Board board) {
+		super(x, y, color,board);
+	}
 
 	/*
 	 * (non-Javadoc)

@@ -1,153 +1,125 @@
 package pawnTest;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.ArrayList;
-
 import org.junit.Test;
 
-import board.Board;
-import board.Move;
-import pieces.PieceColor;
 import pieces.Pawn;
+import pieces.PieceColor;
+import testSuite.MainTestClass;
+import testSuite.TestExpectedMoves;
+import testSuite.TestMove;
 
 /*
- * Test class to check for the basic pawn movements: single move and double move when the Pawn is at the start position
+ * Test class to check for the basic pawn movements
  */
-public class PawnSimpleMovement {
-
-	Board board;
-	ArrayList<Move> moves;
-
+public class PawnSimpleMovement extends MainTestClass {
+	
 	/*
-	 * Following are single white movement checks without other pieces on the board
+	 * Following are single white movement checks without other pieces on the
+	 * board
 	 */
 	@Test
 	public void simpleWhiteMoveNoOtherPiecesTest1() {
-		board = new Board();
-		moves = new ArrayList<Move>();
-		Pawn pawn = new Pawn(4, 4, PieceColor.WHITE);
+		this.reset();
+		Pawn pawn = new Pawn(4, 4, PieceColor.WHITE, board);
 
-		board.addPiece(pawn);
-
-		moves = pawn.possibleMoves(board);
-		/*
-		 * There should only be one move for the pawn
-		 */
-		assertEquals(1,moves.size());
-		
-		/*
-		 * Since pawn is white, it's single move should be towards 4,3
-		 */
-		assertEquals(4,moves.get(0).toX());
-		assertEquals(3,moves.get(0).toY());
+		// Expecting pawn can only move to 4,3
+		new TestMove(4, 3, testMoves);
+		new TestExpectedMoves(board, pawn, testMoves);
 	}
 
 	@Test
 	public void simpleWhiteMoveNoOtherPiecesTest2() {
-		board = new Board();
-		moves = new ArrayList<Move>();
-		Pawn pawn = new Pawn(0, 5, PieceColor.WHITE);
+		this.reset();
+		Pawn pawn = new Pawn(0, 5, PieceColor.WHITE, board);
 
-		board.addPiece(pawn);
-
-		moves = pawn.possibleMoves(board);
-		/*
-		 * There should only be one move for the pawn
-		 */
-		assertEquals(1,moves.size());
-		
-		/*
-		 * Since pawn is white, it's single move should be towards 4,3
-		 */
-		assertEquals(0,moves.get(0).toX());
-		assertEquals(4,moves.get(0).toY());
+		// Expecting pawn can only move to 0,4
+		new TestMove(0, 4, testMoves);
+		new TestExpectedMoves(board, pawn, testMoves);
 	}
-	
+
 	@Test
 	public void simpleWhiteMoveNoOtherPiecesTest3() {
-		board = new Board();
-		moves = new ArrayList<Move>();
-		Pawn pawn = new Pawn(7, 3, PieceColor.WHITE);
+		this.reset();
+		Pawn pawn = new Pawn(7, 3, PieceColor.WHITE, board);
 
-		board.addPiece(pawn);
-
-		moves = pawn.possibleMoves(board);
-		/*
-		 * There should only be one move for the pawn
-		 */
-		assertEquals(1,moves.size());
-		
-		/*
-		 * Since pawn is white, it's single move should be towards 4,3
-		 */
-		assertEquals(7,moves.get(0).toX());
-		assertEquals(2,moves.get(0).toY());
+		// Expecting pawn can only move to 7,2
+		new TestMove(7, 2, testMoves);
+		new TestExpectedMoves(board, pawn, testMoves);
 	}
-	
+
 	/*
 	 * Simple black pawn movements
 	 */
 	@Test
 	public void simpleBlackMoveNoOtherPiecesTest1() {
-		board = new Board();
-		moves = new ArrayList<Move>();
-		Pawn pawn = new Pawn(0, 2, PieceColor.BLACK);
+		this.reset();
+		Pawn pawn = new Pawn(0, 2, PieceColor.BLACK, board);
 
-		board.addPiece(pawn);
-
-		moves = pawn.possibleMoves(board);
-		/*
-		 * There should only be one move for the pawn
-		 */
-		assertEquals(1,moves.size());
-		
-		/*
-		 * Since pawn is white, it's single move should be towards 4,3
-		 */
-		assertEquals(0,moves.get(0).toX());
-		assertEquals(3,moves.get(0).toY());
+		// Expecting pawn can only move to 0,3
+		new TestMove(0, 3, testMoves);
+		new TestExpectedMoves(board, pawn, testMoves);
 	}
-	
+
 	@Test
 	public void simpleBlackMoveNoOtherPiecesTest2() {
-		board = new Board();
-		moves = new ArrayList<Move>();
-		Pawn pawn = new Pawn(5, 4, PieceColor.BLACK);
+		this.reset();
+		Pawn pawn = new Pawn(5, 4, PieceColor.BLACK, board);
 
-		board.addPiece(pawn);
-
-		moves = pawn.possibleMoves(board);
-		/*
-		 * There should only be one move for the pawn
-		 */
-		assertEquals(1,moves.size());
-		
-		/*
-		 * Since pawn is white, it's single move should be towards 4,3
-		 */
-		assertEquals(5,moves.get(0).toX());
-		assertEquals(5,moves.get(0).toY());
+		// Expecting pawn can only move to 5,5
+		new TestMove(5, 5, testMoves);
+		new TestExpectedMoves(board, pawn, testMoves);
 	}
-	
+
 	@Test
 	public void simpleBlackMoveNoOtherPiecesTest3() {
-		board = new Board();
-		moves = new ArrayList<Move>();
-		Pawn pawn = new Pawn(7, 5, PieceColor.BLACK);
+		this.reset();
+		Pawn pawn = new Pawn(7, 5, PieceColor.BLACK, board);
 
-		board.addPiece(pawn);
+		// Expecting pawn can only move to 7,6
+		new TestMove(7, 6, testMoves);
+		new TestExpectedMoves(board, pawn, testMoves);
+	}
 
-		moves = pawn.possibleMoves(board);
-		/*
-		 * There should only be one move for the pawn
-		 */
-		assertEquals(1,moves.size());
+	/*
+	 * Simple movement when there is a piece in front of the pawn
+	 */
+	@Test
+	public void simpleWhiteMoveBlockedByFriendlyPiece() {
+		this.reset();
+		Pawn pawn = new Pawn(4, 4, PieceColor.WHITE, board);
+		new Pawn(4, 3, PieceColor.WHITE,board);
 		
-		/*
-		 * Since pawn is white, it's single move should be towards 4,3
-		 */
-		assertEquals(7,moves.get(0).toX());
-		assertEquals(6,moves.get(0).toY());
+		// Expecting pawn can move nowhere
+		new TestExpectedMoves(board, pawn, testMoves);
+	}
+
+	@Test
+	public void simpleWhiteMoveBlockedByEnemyPiece() {
+		this.reset();
+		Pawn pawn = new Pawn(4, 4, PieceColor.WHITE, board);
+		new Pawn(4, 3, PieceColor.BLACK,board);
+		
+		// Expecting pawn can move nowhere
+		new TestExpectedMoves(board, pawn, testMoves);
+	}
+
+	@Test
+	public void simpleBlackMoveBlockedByFriendlyPiece() {
+		this.reset();
+		Pawn pawn = new Pawn(4, 3, PieceColor.BLACK, board);
+		new Pawn(4, 4, PieceColor.BLACK,board);
+		
+		// Expecting pawn can move nowhere
+		new TestExpectedMoves(board, pawn, testMoves);
+	}
+
+	@Test
+	public void simpleBlackMoveBlockedByEnemyPiece() {
+		this.reset();
+		Pawn pawn = new Pawn(4, 3, PieceColor.BLACK, board);
+		new Pawn(4, 4, PieceColor.WHITE,board);
+		
+		// Expecting pawn can move nowhere
+		new TestExpectedMoves(board, pawn, testMoves);
 	}
 }

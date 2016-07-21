@@ -29,6 +29,11 @@ public abstract class Piece implements PieceInterface{
 		this.posY = y;
 		this.color = color;
 	}
+	
+	public Piece(int x, int y, PieceColor color, Board board){
+		this(x,y,color);
+		board.addPiece(this);
+	}
 
 	/*
 	 * Getters for the position of the piece
