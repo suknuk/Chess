@@ -3,6 +3,7 @@ package testSuite;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
+import bishopTest.BishopTestSuite;
 import pawnTest.PawnTestSuite;
 import towerTest.TowerTestSuite;
 
@@ -10,7 +11,8 @@ import towerTest.TowerTestSuite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ 
 	PawnTestSuite.class,
-	TowerTestSuite.class
+	TowerTestSuite.class,
+	BishopTestSuite.class
 })
 
 public class JUnitTestSuite {
