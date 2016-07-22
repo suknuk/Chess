@@ -4,9 +4,12 @@ import java.util.ArrayList;
 
 import board.Board;
 import board.Move;
+import chess.BoardEvaluation;
 
 public class Bishop extends Piece {
 
+	final int pieceValue = BoardEvaluation.bishopValue;
+	
 	/*
 	 * Constructor
 	 */
@@ -18,6 +21,15 @@ public class Bishop extends Piece {
 		super(x, y, color, board);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see pieces.Piece#pieceValue()
+	 */
+	@Override
+	public int pieceValue() {
+		return this.pieceValue;
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 

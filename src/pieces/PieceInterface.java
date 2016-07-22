@@ -9,7 +9,7 @@ import board.Move;
  * Piece interface with methods all pieces must have
  */
 public interface PieceInterface {
-
+	
 	/*
 	 * Vertical position of the piece on the field
 	 */
@@ -29,4 +29,9 @@ public interface PieceInterface {
 	 * Enum type of the piece's color
 	 */
 	public PieceColor color();
+	
+	/*
+	 * returning the piece value
+	 */
+	public int pieceValue();
 }

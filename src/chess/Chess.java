@@ -11,6 +11,7 @@ import pieces.Queen;
 import pieces.Tower;
 
 public class Chess {
+	
 	/*
 	 * Setting up the board for a normal game
 	 */

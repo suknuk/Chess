@@ -4,9 +4,12 @@ import java.util.ArrayList;
 
 import board.Board;
 import board.Move;
+import chess.BoardEvaluation;
 
 public class Tower extends Piece {
 
+	final int pieceValue = BoardEvaluation.towerValue;
+	
 	/*
 	 * variable used for the castling move
 	 */
@@ -23,6 +26,15 @@ public class Tower extends Piece {
 		this.moved = false;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see pieces.Piece#pieceValue()
+	 */
+	@Override
+	public int pieceValue() {
+		return this.pieceValue;
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * @see pieces.Piece#possibleMoves(board.Board)

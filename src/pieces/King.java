@@ -4,12 +4,15 @@ import java.util.ArrayList;
 
 import board.Board;
 import board.Move;
+import chess.BoardEvaluation;
 
 /*
  * King piece class
  */
 public class King extends Piece {
 
+	final int pieceValue = BoardEvaluation.kingValue;
+	
 	/*
 	 * variable used for the castling move
 	 */
@@ -26,6 +29,15 @@ public class King extends Piece {
 		super(x, y, color, board);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see pieces.Piece#pieceValue()
+	 */
+	@Override
+	public int pieceValue() {
+		return this.pieceValue;
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 

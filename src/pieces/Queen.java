@@ -4,12 +4,15 @@ import java.util.ArrayList;
 
 import board.Board;
 import board.Move;
+import chess.BoardEvaluation;
 
 /*
  * Queen class
  */
 public class Queen extends Piece {
 
+	final int pieceValue = BoardEvaluation.queenValue;
+	
 	/*
 	 * Public constructors
 	 */
@@ -21,6 +24,15 @@ public class Queen extends Piece {
 		super(x, y, color, board);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see pieces.Piece#pieceValue()
+	 */
+	@Override
+	public int pieceValue() {
+		return this.pieceValue;
+	}
+	
 	/*
 	 * As this piece is basically the tower and the bishop, we simple use
 	 * the already written methods by these classes to find the moves

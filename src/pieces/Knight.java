@@ -4,12 +4,15 @@ import java.util.ArrayList;
 
 import board.Board;
 import board.Move;
+import chess.BoardEvaluation;
 
 /*
  * The knight piece class
  */
 public class Knight extends Piece {
 
+	final int pieceValue = BoardEvaluation.knightValue;
+	
 	/*
 	 * public constructors
 	 */
@@ -21,6 +24,15 @@ public class Knight extends Piece {
 		super(x, y, color, board);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see pieces.Piece#pieceValue()
+	 */
+	@Override
+	public int pieceValue() {
+		return this.pieceValue;
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 

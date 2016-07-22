@@ -8,14 +8,14 @@ import board.Move;
 /*
  * Abstact class because 'new Piece' should be disallowed
  */
-public abstract class Piece implements PieceInterface{
-	
+public abstract class Piece implements PieceInterface {
+
 	/*
 	 * private X and Y positions of the piece
 	 */
 	private int posX;
 	private int posY;
-	
+
 	/*
 	 * private enum color variable
 	 */
@@ -24,15 +24,25 @@ public abstract class Piece implements PieceInterface{
 	/*
 	 * Constructor
 	 */
-	public Piece(int x, int y, PieceColor color){
+	public Piece(int x, int y, PieceColor color) {
 		this.posX = x;
 		this.posY = y;
 		this.color = color;
 	}
-	
-	public Piece(int x, int y, PieceColor color, Board board){
-		this(x,y,color);
+
+	public Piece(int x, int y, PieceColor color, Board board) {
+		this(x, y, color);
 		board.addPiece(this);
+	}
+
+	/*
+	 * Returning the piece value (non-Javadoc)
+	 * 
+	 * @see pieces.PieceInterface#pieceValuer()
+	 */
+	@Override
+	public int pieceValue() {
+		return 0;
 	}
 
 	/*
@@ -50,31 +60,32 @@ public abstract class Piece implements PieceInterface{
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see pieces.PieceInterface#possibleMoves()
 	 */
 	@Override
 	public ArrayList<Move> possibleMoves(Board board) {
 		return null;
 	}
-	
+
 	/*
 	 * Moving a piece to a field
 	 */
-	public void hitMove(int toX, int toY, Board board, ArrayList<Move> moves){
+	public void hitMove(int toX, int toY, Board board, ArrayList<Move> moves) {
 		// Boundary check
 		if (toX >= 0 && toX <= 7 && toY >= 0 && toY <= 7) {
 			Piece piece = board.getPieceAt(toX, toY);
-			if (piece == null || piece.color != this.color){
+			if (piece == null || piece.color != this.color) {
 				new Move(this, board, toX, toY, moves);
 			}
 		}
 	}
-	
+
 	/*
 	 * Enum type of the piece's color
 	 */
 	@Override
-	public PieceColor color(){
+	public PieceColor color() {
 		return this.color;
 	}
 }

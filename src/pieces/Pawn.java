@@ -4,9 +4,12 @@ import java.util.ArrayList;
 
 import board.Board;
 import board.Move;
+import chess.BoardEvaluation;
 
 public class Pawn extends Piece {
-
+	
+	final int pieceValue = BoardEvaluation.pawnValue;
+	
 	/*
 	 * Constructor
 	 */
@@ -16,6 +19,15 @@ public class Pawn extends Piece {
 	
 	public Pawn(int x, int y, PieceColor color,Board board) {
 		super(x, y, color,board);
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see pieces.Piece#pieceValue()
+	 */
+	@Override
+	public int pieceValue() {
+		return this.pieceValue;
 	}
 
 	/*
