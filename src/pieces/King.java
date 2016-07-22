@@ -12,12 +12,12 @@ import chess.BoardEvaluation;
 public class King extends Piece {
 
 	final int pieceValue = BoardEvaluation.kingValue;
-	
+
 	/*
 	 * variable used for the castling move
 	 */
-	private boolean moved = false;
-	
+	private boolean moved = true;
+
 	/*
 	 * public constructors
 	 */
@@ -31,13 +31,14 @@ public class King extends Piece {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see pieces.Piece#pieceValue()
 	 */
 	@Override
 	public int pieceValue() {
 		return this.pieceValue;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -56,19 +57,53 @@ public class King extends Piece {
 						&& (this.getPositionY() + y >= 0 && this.getPositionY() + y <= 7) && !(x == 0 && y == 0))
 					try {
 						new Move(this, board, this.getPoisitonX() + x, this.getPositionY() + y, moves);
-					} catch (Exception ex){
+					} catch (Exception ex) {
 						System.out.println(ex.toString());
 					}
 			}
 		}
 
+		/*
+		 * special case: castling move
+		 */
+		if (!this.hasMoved() && this.getPositionY() == 7 && this.getPoisitonX() == 4
+				&& this.color() == PieceColor.WHITE) {
+			/*
+			 * checking white king right move. Spots between have to be empty
+			 */
+			if (board.getPieceAt(5, 7) == null && board.getPieceAt(6, 7) == null && board.getPieceAt(7, 7) != null) {
+				if (board.getPieceAt(7, 7).getClass().equals(Tower.class)) {
+					Tower t = (Tower) board.getPieceAt(7, 7);
+					if (!t.hasMoved()) {
+						new Move(this, board, 6, 7, moves);
+					}
+				}
+			}
+			/*
+			 * checking white king left move. Spots between have to be empty
+			 */
+			if (board.getPieceAt(3, 7) == null && board.getPieceAt(2, 7) == null && board.getPieceAt(1, 7) == null
+					&& board.getPieceAt(0, 7) != null) {
+				if (board.getPieceAt(0, 7).getClass().equals(Tower.class)) {
+					Tower t = (Tower) board.getPieceAt(0, 7);
+					if (!t.hasMoved()) {
+						new Move(this, board, 2, 7, moves);
+					}
+				}
+			}
+
+		}
 		return moves;
 	}
-	
+
 	/*
 	 * used for the castling move
 	 */
-	public boolean hasMoved(){
+	public boolean hasMoved() {
 		return this.moved;
+	}
+
+	public void setNotMoved() {
+		this.moved = false;
 	}
 }

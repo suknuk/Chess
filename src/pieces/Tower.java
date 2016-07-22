@@ -9,34 +9,36 @@ import chess.BoardEvaluation;
 public class Tower extends Piece {
 
 	final int pieceValue = BoardEvaluation.towerValue;
-	
+
 	/*
 	 * variable used for the castling move
 	 */
-	private boolean moved;
+	private boolean moved = true;
+
 	/*
 	 * Constructor
 	 */
 	public Tower(int x, int y, PieceColor color) {
 		super(x, y, color);
-		this.moved = false;
 	}
-	public Tower(int x, int y, PieceColor color, Board board){
-		super(x, y, color,board);
-		this.moved = false;
+
+	public Tower(int x, int y, PieceColor color, Board board) {
+		super(x, y, color, board);
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see pieces.Piece#pieceValue()
 	 */
 	@Override
 	public int pieceValue() {
 		return this.pieceValue;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see pieces.Piece#possibleMoves(board.Board)
 	 */
 	@Override
@@ -45,17 +47,21 @@ public class Tower extends Piece {
 
 		checkNorth(board, moves);
 		checkSouth(board, moves);
-		checkWest(board,moves);
-		checkEast(board,moves);
+		checkWest(board, moves);
+		checkEast(board, moves);
 
 		return moves;
 	}
-	
+
 	/*
 	 * used for the castling move
 	 */
-	public boolean hasMoved(){
+	public boolean hasMoved() {
 		return this.moved;
+	}
+
+	public void setNotMoved() {
+		this.moved = false;
 	}
 
 	/*
@@ -112,7 +118,7 @@ public class Tower extends Piece {
 			}
 		}
 	}
-	
+
 	/*
 	 * Moves possible to the west
 	 */
