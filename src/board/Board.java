@@ -1,6 +1,9 @@
 package board;
 
+import pieces.Pawn;
 import pieces.Piece;
+import pieces.PieceColor;
+import pieces.Queen;
 
 /*
  * This class holds all the board information
@@ -58,12 +61,38 @@ public class Board {
 	public void applyMove(Move move) {
 		// get copy
 		Piece movingPiece = this.board[move.fromX()][move.fromY()];
-		// update board and new copy
-		this.board[move.toX()][move.toY()] = movingPiece;
-		movingPiece.setX(move.toX());;
-		movingPiece.setY(move.toY());
+
+		/*
+		 * Error handling
+		 */
+		if (movingPiece == null) {
+			throw new java.lang.IllegalArgumentException("Trying to move non-existant piece");
+		}
+
+		/*
+		 * special case to change pawn into queen white pawn reaches black side
+		 */
+		if (move.toY() == 0 && movingPiece.getClass().equals(Pawn.class)
+				&& movingPiece.color() == PieceColor.WHITE) {
+			new Queen(move.toX(), move.toY(), PieceColor.WHITE, this);
+		}
+		/*
+		 * black pawn reaches white side
+		 */
+		else if (move.toY() == 7 && movingPiece.getClass().equals(Pawn.class)
+				&& movingPiece.color() == PieceColor.BLACK) {
+			new Queen(move.toX(), move.toY(), PieceColor.BLACK, this);
+		}
+		/*
+		 * otherwise just move the piece
+		 */
+		else {
+			this.board[move.toX()][move.toY()] = movingPiece;
+			movingPiece.setX(move.toX());
+			movingPiece.setY(move.toY());
+		}
 		// destroy old copy
 		this.board[move.fromX()][move.fromY()] = null;
-		
+
 	}
 }
