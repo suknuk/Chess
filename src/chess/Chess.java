@@ -1,11 +1,13 @@
 package chess;
 
+import java.util.ArrayList;
+
 import board.Board;
+import board.Move;
 import pieces.Bishop;
 import pieces.King;
 import pieces.Knight;
 import pieces.Pawn;
-import pieces.Piece;
 import pieces.PieceColor;
 import pieces.Queen;
 import pieces.Tower;
@@ -48,15 +50,34 @@ public class Chess {
 	 * Display board on console
 	 */
 	public static void displayBoardText(Board board) {
+		/*
+		 * Iterating every field
+		 */
 		for (int y = 0; y <= 7; y++) {
 			String line = "";
 			for (int x = 0; x <= 7; x++) {
-				Piece piece = board.getPieceAt(x, y);
-				if (piece != null) {
-					line += " " + piece.getClass();
+				if (board.getPieceAt(x, y) != null) {
+					line += " " + board.getPieceAt(x, y).getClass();
 				}
 			}
 			System.out.println(line);
 		}
 	}
+	
+	/*
+	 * Every possible move from a player
+	 */
+	public static ArrayList<Move> allPossibleMoves(Board board, PieceColor color){
+		ArrayList<Move> allMoves = new ArrayList<Move>();
+		
+		for (int y = 0; y <= 7; y++) {
+			for (int x = 0; x <= 7; x++) {
+				if ((board.getPieceAt(x, y) != null) && (board.getPieceAt(x, y).color() == color)) {
+					allMoves.addAll(board.getPieceAt(x, y).possibleMoves(board));
+				}
+			}
+		}
+		return allMoves;
+	}
+	
 }

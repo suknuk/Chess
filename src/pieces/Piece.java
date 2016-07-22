@@ -35,16 +35,19 @@ public abstract class Piece implements PieceInterface {
 		board.addPiece(this);
 	}
 
+
 	/*
-	 * Returning the piece value (non-Javadoc)
-	 * 
-	 * @see pieces.PieceInterface#pieceValuer()
+	 * (non-Javadoc)
+	 * @see pieces.PieceInterface#setX(int)
 	 */
 	@Override
-	public int pieceValue() {
-		return 0;
+	public void setX(int x){
+		this.posX = x;
 	}
-
+	@Override
+	public void setY(int y){
+		this.posY = y;
+	}
 	/*
 	 * Getters for the position of the piece
 	 */

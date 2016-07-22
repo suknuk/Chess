@@ -34,4 +34,10 @@ public interface PieceInterface {
 	 * returning the piece value
 	 */
 	public int pieceValue();
+	
+	/*
+	 * Setting a new position
+	 */
+	public void setX(int x);
+	public void setY(int y);
 }

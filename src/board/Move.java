@@ -59,9 +59,14 @@ public class Move {
 		moves.add(this);
 	}
 
+	
 	/*
 	 * public getters
 	 */
+	public Piece getMovingPiece(){
+		return this.movingPiece;
+	}
+	
 	public int toX() {
 		return this.toX;
 	}
