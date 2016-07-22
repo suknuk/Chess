@@ -2,6 +2,7 @@ package towerTest;
 
 import org.junit.Test;
 
+import pieces.Bishop;
 import pieces.Pawn;
 import pieces.PieceColor;
 import pieces.Tower;
@@ -85,6 +86,22 @@ public class TowerSimpleMovement extends MainTestClass {
 		// Expecting tower to move to 4,5 , 4,3
 		new TestMove(4, 5, testMoves);
 		new TestMove(4, 3, testMoves);
+
+		new TestExpectedMoves(board, tower, testMoves);
+	}
+	
+	/* 
+	 * Tower stuck in corner with friendly pieces
+	 */
+	@Test
+	public void towerStuckInCorner() {
+		this.reset();
+		Tower tower = new Tower(0, 7, PieceColor.WHITE, board);
+		new Pawn(0, 6, PieceColor.WHITE, board);
+		new Pawn(1, 6, PieceColor.BLACK, board);
+		new Bishop(1, 7, PieceColor.WHITE, board);
+		
+		// No moves possible
 
 		new TestExpectedMoves(board, tower, testMoves);
 	}

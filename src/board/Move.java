@@ -38,8 +38,7 @@ public class Move {
 			 * Moving to same color piece
 			 */
 			else if (toPiece.color() == piece.color()) {
-				System.out.println("Trying to move onto existing same color piece");
-				throw new java.lang.IllegalArgumentException();
+				throw new java.lang.IllegalArgumentException("Trying to move onto existing same color piece");
 			}
 			/*
 			 * Hitting enemy piece
@@ -48,8 +47,7 @@ public class Move {
 				System.out.println(". Enemy piece hit");
 			}
 		} else {
-			System.out.println("Trying to move out of board");
-			throw new java.lang.IllegalArgumentException();
+			throw new java.lang.IllegalArgumentException("Trying to move out of board");
 		}
 	}
 

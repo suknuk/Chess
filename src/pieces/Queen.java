@@ -30,13 +30,32 @@ public class Queen extends Piece {
 	@Override
 	public ArrayList<Move> possibleMoves(Board board) {
 		ArrayList<Move> moves = new ArrayList<Move>();
-
-		Tower tower = new Tower(this.getPoisitonX(),this.getPositionY(),this.color(),board);
-		Bishop bishop = new Bishop(this.getPoisitonX(),this.getPositionY(),this.color(),board);
 		
-		tower.possibleMoves(board);
-		bishop.possibleMoves(board);
+		QueenTowerMoves qtm = new QueenTowerMoves(this.getPoisitonX(), this.getPositionY(), this.color(), board);
+		QueenBishopMoves qbm = new QueenBishopMoves(this.getPoisitonX(), this.getPositionY(), this.color(), board);
+		
+		moves.addAll(qtm.possibleMoves(board));
+		moves.addAll(qbm.possibleMoves(board));
 		
 		return moves;
 	}
+	
+	/*
+	 * Private classes to reuse the possibleMoves method by te Tower and Bishop piece
+	 */
+	private class QueenTowerMoves extends Tower{
+		public QueenTowerMoves(int x, int y, PieceColor color, Board board) {
+			super(x, y, color, board);
+		}
+	}
+	
+	private class QueenBishopMoves extends Bishop{
+		public QueenBishopMoves(int x, int y, PieceColor color, Board board) {
+			super(x, y, color, board);
+		}
+		
+	}
 }
+
+
+
