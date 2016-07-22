@@ -43,7 +43,7 @@ public class Move {
 			/*
 			 * Hitting enemy piece
 			 */
-			else if (toPiece.color() != piece.color()){
+			else if (toPiece.color() != piece.color()) {
 				System.out.println(". Enemy piece hit");
 			}
 		} else {
@@ -59,14 +59,13 @@ public class Move {
 		moves.add(this);
 	}
 
-	
 	/*
 	 * public getters
 	 */
-	public Piece getMovingPiece(){
+	public Piece getMovingPiece() {
 		return this.movingPiece;
 	}
-	
+
 	public int toX() {
 		return this.toX;
 	}

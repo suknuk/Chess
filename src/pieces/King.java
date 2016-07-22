@@ -49,22 +49,22 @@ public class King extends Piece {
 		ArrayList<Move> moves = new ArrayList<Move>();
 
 		/*
-		 * The king can move in every direction one field
+		 * The king can move in every direction one field and hit enemies
 		 */
 		for (int x = -1; x <= 1; x++) {
 			for (int y = -1; y <= 1; y++) {
 				if ((this.getPoisitonX() + x >= 0 && this.getPoisitonX() + x <= 7)
-						&& (this.getPositionY() + y >= 0 && this.getPositionY() + y <= 7) && !(x == 0 && y == 0))
-					try {
+						&& (this.getPositionY() + y >= 0 && this.getPositionY() + y <= 7) && !(x == 0 && y == 0)) {
+					if ((board.getPieceAt(this.getPoisitonX() + x, this.getPositionY() + y) == null) || board
+							.getPieceAt(this.getPoisitonX() + x, this.getPositionY() + y).color() != this.color()) {
 						new Move(this, board, this.getPoisitonX() + x, this.getPositionY() + y, moves);
-					} catch (Exception ex) {
-						System.out.println(ex.toString());
 					}
+				}
 			}
 		}
 
 		/*
-		 * special case: castling move
+		 * special case: white castling move
 		 */
 		if (!this.hasMoved() && this.getPositionY() == 7 && this.getPoisitonX() == 4
 				&& this.color() == PieceColor.WHITE) {
@@ -80,18 +80,49 @@ public class King extends Piece {
 				}
 			}
 			/*
-			 * checking white king left move. Spots between have to be empty
+			 * checking white king left move
 			 */
-			if (board.getPieceAt(3, 7) == null && board.getPieceAt(2, 7) == null && board.getPieceAt(1, 7) == null
+			else if (board.getPieceAt(3, 7) == null && board.getPieceAt(2, 7) == null && board.getPieceAt(1, 7) == null
 					&& board.getPieceAt(0, 7) != null) {
-				if (board.getPieceAt(0, 7).getClass().equals(Tower.class)) {
+				if (board.getPieceAt(0, 7).getClass().equals(Tower.class)
+						&& board.getPieceAt(0, 7).color() == PieceColor.WHITE) {
 					Tower t = (Tower) board.getPieceAt(0, 7);
 					if (!t.hasMoved()) {
 						new Move(this, board, 2, 7, moves);
 					}
 				}
 			}
-
+		}
+		/*
+		 * black castling move
+		 */
+		else if (!this.hasMoved() && this.getPositionY() == 0 && this.getPoisitonX() == 4
+				&& this.color() == PieceColor.BLACK) {
+			/*
+			 * checking black king right move
+			 */
+			if (board.getPieceAt(5, 0) == null && board.getPieceAt(6, 0) == null && board.getPieceAt(7, 0) != null) {
+				if (board.getPieceAt(7, 0).getClass().equals(Tower.class)
+						&& board.getPieceAt(7, 0).color() == PieceColor.BLACK) {
+					Tower t = (Tower) board.getPieceAt(7, 0);
+					if (!t.hasMoved()) {
+						new Move(this, board, 6, 0, moves);
+					}
+				}
+			}
+			/*
+			 * left move
+			 */
+			else if (board.getPieceAt(3, 0) == null && board.getPieceAt(2, 0) == null && board.getPieceAt(1, 0) == null
+					&& board.getPieceAt(0, 0) != null) {
+				if (board.getPieceAt(0, 0).getClass().equals(Tower.class)
+						&& board.getPieceAt(0, 0).color() == PieceColor.BLACK) {
+					Tower t = (Tower) board.getPieceAt(0, 0);
+					if (!t.hasMoved()) {
+						new Move(this, board, 2, 0, moves);
+					}
+				}
+			}
 		}
 		return moves;
 	}
