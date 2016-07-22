@@ -11,6 +11,11 @@ import board.Move;
 public class King extends Piece {
 
 	/*
+	 * variable used for the castling move
+	 */
+	private boolean moved = false;
+	
+	/*
 	 * public constructors
 	 */
 	public King(int x, int y, PieceColor color) {
@@ -46,5 +51,12 @@ public class King extends Piece {
 		}
 
 		return moves;
+	}
+	
+	/*
+	 * used for the castling move
+	 */
+	public boolean hasMoved(){
+		return this.moved;
 	}
 }

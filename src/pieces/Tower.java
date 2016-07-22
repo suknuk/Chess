@@ -8,13 +8,19 @@ import board.Move;
 public class Tower extends Piece {
 
 	/*
+	 * variable used for the castling move
+	 */
+	private boolean moved;
+	/*
 	 * Constructor
 	 */
 	public Tower(int x, int y, PieceColor color) {
 		super(x, y, color);
+		this.moved = false;
 	}
 	public Tower(int x, int y, PieceColor color, Board board){
 		super(x, y, color,board);
+		this.moved = false;
 	}
 
 	/*
@@ -31,6 +37,13 @@ public class Tower extends Piece {
 		checkEast(board,moves);
 
 		return moves;
+	}
+	
+	/*
+	 * used for the castling move
+	 */
+	public boolean hasMoved(){
+		return this.moved;
 	}
 
 	/*
