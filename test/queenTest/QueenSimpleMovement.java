@@ -102,5 +102,4 @@ public class QueenSimpleMovement extends MainTestClass {
 
 		new TestExpectedMoves(board, queen, testMoves);
 	}
-
 }

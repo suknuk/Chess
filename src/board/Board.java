@@ -17,15 +17,18 @@ public class Board {
 	 */
 	private Piece[][] board;
 
-	/*
+	/**
 	 * Board constructor
 	 */
 	public Board() {
 		this.board = new Piece[8][8];
 	}
 
-	/*
+	/**
 	 * Copy constructor
+	 * 
+	 * @param copyMe
+	 *            copying a board instance
 	 */
 	public Board(Board copyMe) {
 		this();
@@ -36,29 +39,41 @@ public class Board {
 		}
 	}
 
-	/*
+	/**
 	 * Returning status of the board
+	 * 
+	 * @return the board instance
 	 */
 	public Piece[][] getBoard() {
 		return this.board;
 	}
 
-	/*
+	/**
 	 * Returning piece at X/Y position
+	 * 
+	 * @param x
+	 *            x position of the piece
+	 * @param y
+	 *            y position of the piece
+	 * @return Piece at the indicated position
 	 */
 	public Piece getPieceAt(int x, int y) {
 		return board[x][y];
 	}
 
-	/*
-	 * Adding a piece to the board
+	/**
+	 * @param piece
+	 *            piece to be added to the board
 	 */
 	public void addPiece(Piece piece) {
 		this.board[piece.getPoisitonX()][piece.getPositionY()] = piece;
 	}
 
-	/*
-	 * applying a move to the board
+	/**
+	 * Applying a move to the board
+	 * 
+	 * @param move
+	 *            The to applied move on the board
 	 */
 	public void applyMove(Move move) {
 		// get copy
@@ -132,12 +147,19 @@ public class Board {
 		 * otherwise just move the piece
 		 */
 		else {
-			this.board[move.toX()][move.toY()] = movingPiece;
+			System.out.println("moving piece");
+			System.out.println(this.board[move.toX()][move.toY()]);
+
+			// this.board[move.toX()][move.toY()] = movingPiece;
+			this.board[move.toX()][move.toY()] = null;
+
+			System.out.println(this.board[move.toX()][move.toY()]);
+
 			movingPiece.setX(move.toX());
 			movingPiece.setY(move.toY());
 		}
 		// destroy old copy
 		this.board[move.fromX()][move.fromY()] = null;
-
+		System.out.println("from " + this.board[move.fromX()][move.fromY()]);
 	}
 }

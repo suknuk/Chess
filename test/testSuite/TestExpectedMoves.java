@@ -16,7 +16,7 @@ import pieces.Piece;
  * taking the board, the to be checked piece and iterate all expecting moves
  */
 public class TestExpectedMoves {
-	private Board board;
+	//private Board board;
 	private Piece piece;
 	private ArrayList<TestMove> testMoves;
 	private ArrayList<Move> moves;
@@ -25,10 +25,10 @@ public class TestExpectedMoves {
 	 * Constructor
 	 */
 	public TestExpectedMoves(Board board, Piece piece, ArrayList<TestMove> testMoves) {
-		this.board = board;
+		//this.board = board;
 		this.piece = piece;
 		this.testMoves = testMoves;
-		this.moves = this.piece.possibleMoves(this.board);
+		this.moves = this.piece.possibleMoves(board);
 
 		// do the test
 		this.test();

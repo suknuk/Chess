@@ -9,35 +9,48 @@ import board.Move;
  * Piece interface with methods all pieces must have
  */
 public interface PieceInterface {
-	
-	/*
-	 * Vertical position of the piece on the field
+
+	/**
+	 * @return Vertical position of the piece on the field
 	 */
 	public int getPoisitonX();
 
-	/*
-	 * Horizontal position of the piece on the field
+	/**
+	 * @return Horizontal position of the piece on the field
 	 */
 	public int getPositionY();
 
-	/*
-	 * Returning all possible moves this piece is able to do
+	/**
+	 * @return all possible moves this piece is able to do
 	 */
 	public ArrayList<Move> possibleMoves(Board board);
 
-	/*
-	 * Enum type of the piece's color
+	/**
+	 * @return Enum type of the piece's color
 	 */
 	public PieceColor color();
-	
-	/*
-	 * returning the piece value
+
+	/**
+	 * @return the piece value
 	 */
 	public int pieceValue();
-	
+
 	/*
-	 * Setting a new position
+	 * 
+	 */
+	/**
+	 * Setting a new x position
+	 * 
+	 * @param x
+	 *            new x position
 	 */
 	public void setX(int x);
+
+	/**
+	 * Setting a new y position
+	 * 
+	 * @param y
+	 *            new x pisition
+	 */
 	public void setY(int y);
 }

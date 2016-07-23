@@ -4,8 +4,11 @@ import java.util.ArrayList;
 
 import pieces.Piece;
 
-/*
+/**
  * This class deals with the movement of pieces on the chess board
+ * 
+ * @author Raymond Lochner
+ *
  */
 public class Move {
 
@@ -16,8 +19,17 @@ public class Move {
 	private int toX;
 	private int toY;
 
-	/*
-	 * constructor
+	/**
+	 * Constructs a <tt>Move</tt> with the specified coordinates
+	 * 
+	 * @param piece
+	 *            piece to be moved
+	 * @param board
+	 *            board objects on which the piece is moved
+	 * @param toX
+	 *            x position of the move
+	 * @param toY
+	 *            y position of the move
 	 */
 	public Move(Piece piece, Board board, int toX, int toY) {
 		if (toX >= 0 && toX <= 7 && toY >= 0 && toY <= 7) {
@@ -51,8 +63,20 @@ public class Move {
 		}
 	}
 
-	/*
-	 * constructor that adds the move automatically to an ArrayList<Move>
+	/**
+	 * Constructor that adds the <tt>Move</tt> automatically to an
+	 * <tt>ArrayList<Move></tt>
+	 * 
+	 * @param piece
+	 *            piece to be moved
+	 * @param board
+	 *            board objects on which the piece is moved
+	 * @param toX
+	 *            x position of the move
+	 * @param toY
+	 *            y position of the move
+	 * @param moves
+	 *            ArrayList<Move> to which the move shall be added to
 	 */
 	public Move(Piece piece, Board board, int toX, int toY, ArrayList<Move> moves) {
 		this(piece, board, toX, toY);
@@ -66,18 +90,30 @@ public class Move {
 		return this.movingPiece;
 	}
 
+	/**
+	 * @return Position of the x destination
+	 */
 	public int toX() {
 		return this.toX;
 	}
 
+	/**
+	 * @return Position of the y destination
+	 */
 	public int toY() {
 		return this.toY;
 	}
 
+	/**
+	 * @return Position of the x starting point
+	 */
 	public int fromX() {
 		return this.movingPiece.getPoisitonX();
 	}
 
+	/**
+	 * @return Position of the y starting point
+	 */
 	public int fromY() {
 		return this.movingPiece.getPositionY();
 	}

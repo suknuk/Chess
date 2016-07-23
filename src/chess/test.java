@@ -9,6 +9,7 @@ import pieces.Tower;
 public class test {
 
 	public static void main(String[] args) {
+		/*
 		Board board = new Board();
 		
 		King king = new King(4,7, PieceColor.WHITE, board);
@@ -21,7 +22,17 @@ public class test {
 		System.out.println(board.getPieceAt(5, 7));
 		System.out.println(board.getPieceAt(6, 7));
 		System.out.println(board.getPieceAt(7, 7));
+		*/
 		
+		Board board = new Board();
+		Tower towerw = new Tower(7,7,PieceColor.WHITE,board);
+		Tower towerb = new Tower(0,7,PieceColor.BLACK,board);
+		
+		Move mv2 = new Move(towerw,board,0,7);
+		board.applyMove(mv2);
+		
+		System.out.println(board.getPieceAt(0, 7));
+		System.out.println(board.getPieceAt(7, 7));
 		
 		//System.out.println(BoardEvaluation.scoreEvaluation(board, PieceColor.WHITE));
 		//System.out.println(Chess.allPossibleMoves(board, PieceColor.WHITE).size());
