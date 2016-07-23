@@ -1,7 +1,10 @@
 package kingTest;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
+import board.Move;
 import pieces.Bishop;
 import pieces.King;
 import pieces.PieceColor;
@@ -22,9 +25,9 @@ public class KingCastling extends MainTestClass {
 	public void WhiteKingCastlingRight() {
 		this.reset();
 		King king = new King(4, 7, PieceColor.WHITE, board);
-		king.setNotMoved();
+		king.setMoved(false);
 		Tower tower = new Tower(7, 7, PieceColor.WHITE, board);
-		tower.setNotMoved();
+		tower.setMoved(false);
 
 		new TestMove(3, 6, testMoves);
 		new TestMove(4, 6, testMoves);
@@ -35,6 +38,15 @@ public class KingCastling extends MainTestClass {
 		new TestMove(6, 7, testMoves);
 
 		new TestExpectedMoves(board, king, testMoves);
+		
+		// testing applying move to board
+		Move mv = new Move(king,board,6,7);
+		board.applyMove(mv);
+		
+		assertEquals(null,board.getPieceAt(4, 7));
+		assertEquals(Tower.class,board.getPieceAt(5, 7).getClass());
+		assertEquals(King.class,board.getPieceAt(6, 7).getClass());		
+		assertEquals(null,board.getPieceAt(7, 7));
 	}
 
 	/*
@@ -44,9 +56,9 @@ public class KingCastling extends MainTestClass {
 	public void WhiteKingCastlingLeft() {
 		this.reset();
 		King king = new King(4, 7, PieceColor.WHITE, board);
-		king.setNotMoved();
+		king.setMoved(false);
 		Tower tower = new Tower(0, 7, PieceColor.WHITE, board);
-		tower.setNotMoved();
+		tower.setMoved(false);
 
 		new TestMove(3, 6, testMoves);
 		new TestMove(4, 6, testMoves);
@@ -57,6 +69,16 @@ public class KingCastling extends MainTestClass {
 		new TestMove(2, 7, testMoves);
 
 		new TestExpectedMoves(board, king, testMoves);
+		
+		// testing applying move to board
+		Move mv = new Move(king,board,2,7);
+		board.applyMove(mv);
+		
+		assertEquals(null,board.getPieceAt(0, 7));
+		assertEquals(null,board.getPieceAt(1, 7));
+		assertEquals(King.class,board.getPieceAt(2, 7).getClass());	
+		assertEquals(Tower.class,board.getPieceAt(3, 7).getClass());
+		assertEquals(null,board.getPieceAt(4, 7));
 	}
 
 	/*
@@ -66,9 +88,9 @@ public class KingCastling extends MainTestClass {
 	public void BlackKingCastlingRight() {
 		this.reset();
 		King king = new King(4, 0, PieceColor.BLACK, board);
-		king.setNotMoved();
+		king.setMoved(false);
 		Tower tower = new Tower(7, 0, PieceColor.BLACK, board);
-		tower.setNotMoved();
+		tower.setMoved(false);
 
 		new TestMove(3, 1, testMoves);
 		new TestMove(4, 1, testMoves);
@@ -79,6 +101,15 @@ public class KingCastling extends MainTestClass {
 		new TestMove(6, 0, testMoves);
 
 		new TestExpectedMoves(board, king, testMoves);
+		
+		// testing applying move to board
+		Move mv = new Move(king,board,6,0);
+		board.applyMove(mv);
+		
+		assertEquals(null,board.getPieceAt(4, 0));
+		assertEquals(Tower.class,board.getPieceAt(5, 0).getClass());
+		assertEquals(King.class,board.getPieceAt(6, 0).getClass());		
+		assertEquals(null,board.getPieceAt(7, 0));
 	}
 
 	/*
@@ -88,9 +119,9 @@ public class KingCastling extends MainTestClass {
 	public void BlackKingCastlingLeft() {
 		this.reset();
 		King king = new King(4, 0, PieceColor.BLACK, board);
-		king.setNotMoved();
+		king.setMoved(false);
 		Tower tower = new Tower(0, 0, PieceColor.BLACK, board);
-		tower.setNotMoved();
+		tower.setMoved(false);
 
 		new TestMove(3, 1, testMoves);
 		new TestMove(4, 1, testMoves);
@@ -101,6 +132,16 @@ public class KingCastling extends MainTestClass {
 		new TestMove(2, 0, testMoves);
 
 		new TestExpectedMoves(board, king, testMoves);
+		
+		// testing applying move to board
+		Move mv = new Move(king,board,2,0);
+		board.applyMove(mv);
+		
+		assertEquals(null,board.getPieceAt(0, 0));
+		assertEquals(null,board.getPieceAt(1, 0));
+		assertEquals(King.class,board.getPieceAt(2, 0).getClass());	
+		assertEquals(Tower.class,board.getPieceAt(3, 0).getClass());
+		assertEquals(null,board.getPieceAt(4, 0));
 	}
 
 	/*
@@ -110,9 +151,9 @@ public class KingCastling extends MainTestClass {
 	public void WhiteKingCastlingRightObjectsInTheWay() {
 		this.reset();
 		King king = new King(4, 7, PieceColor.WHITE, board);
-		king.setNotMoved();
+		king.setMoved(false);
 		Tower tower = new Tower(7, 7, PieceColor.WHITE, board);
-		tower.setNotMoved();
+		tower.setMoved(false);
 
 		new Bishop(5, 7, PieceColor.WHITE, board);
 
@@ -131,9 +172,9 @@ public class KingCastling extends MainTestClass {
 	public void WhiteKingCastlingLeftObjectsInTheWay() {
 		this.reset();
 		King king = new King(4, 7, PieceColor.WHITE, board);
-		king.setNotMoved();
+		king.setMoved(false);
 		Tower tower = new Tower(0, 7, PieceColor.WHITE, board);
-		tower.setNotMoved();
+		tower.setMoved(false);
 
 		new Bishop(1, 7, PieceColor.WHITE, board);
 
@@ -153,9 +194,9 @@ public class KingCastling extends MainTestClass {
 	public void BlackKingCastlingRightObjectsInTheWay() {
 		this.reset();
 		King king = new King(4, 0, PieceColor.BLACK, board);
-		king.setNotMoved();
+		king.setMoved(false);
 		Tower tower = new Tower(7, 0, PieceColor.BLACK, board);
-		tower.setNotMoved();
+		tower.setMoved(false);
 
 		new Bishop(5, 0, PieceColor.BLACK, board);
 
@@ -174,9 +215,9 @@ public class KingCastling extends MainTestClass {
 	public void BlackKingCastlingLeftObjectsInTheWay() {
 		this.reset();
 		King king = new King(4, 0, PieceColor.BLACK, board);
-		king.setNotMoved();
+		king.setMoved(false);
 		Tower tower = new Tower(0, 0, PieceColor.BLACK, board);
-		tower.setNotMoved();
+		tower.setMoved(false);
 
 		new Bishop(1, 0, PieceColor.BLACK, board);
 

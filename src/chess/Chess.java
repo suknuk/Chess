@@ -24,10 +24,10 @@ public class Chess {
 			new Pawn(x, 6, PieceColor.WHITE, board);
 		}
 		// Towers
-		new Tower(0, 0, PieceColor.BLACK, board).setNotMoved();
-		new Tower(7, 0, PieceColor.BLACK, board).setNotMoved();
-		new Tower(0, 7, PieceColor.WHITE, board).setNotMoved();
-		new Tower(7, 7, PieceColor.WHITE, board).setNotMoved();
+		new Tower(0, 0, PieceColor.BLACK, board).setMoved(false);
+		new Tower(7, 0, PieceColor.BLACK, board).setMoved(false);
+		new Tower(0, 7, PieceColor.WHITE, board).setMoved(false);
+		new Tower(7, 7, PieceColor.WHITE, board).setMoved(false);
 		// Knights
 		new Knight(1, 0, PieceColor.BLACK, board);
 		new Knight(6, 0, PieceColor.BLACK, board);
@@ -42,8 +42,8 @@ public class Chess {
 		new Queen(3, 0, PieceColor.BLACK, board);
 		new Queen(3, 7, PieceColor.WHITE, board);
 		// Kings
-		new King(4, 0, PieceColor.BLACK, board).setNotMoved();
-		new King(4, 7, PieceColor.WHITE, board).setNotMoved();
+		new King(4, 0, PieceColor.BLACK, board).setMoved(false);
+		new King(4, 7, PieceColor.WHITE, board).setMoved(false);
 	}
 
 	/*

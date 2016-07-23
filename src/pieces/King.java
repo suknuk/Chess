@@ -66,7 +66,7 @@ public class King extends Piece {
 		/*
 		 * special case: white castling move
 		 */
-		if (!this.hasMoved() && this.getPositionY() == 7 && this.getPoisitonX() == 4
+		if (!this.getMoved() && this.getPositionY() == 7 && this.getPoisitonX() == 4
 				&& this.color() == PieceColor.WHITE) {
 			/*
 			 * checking white king right move. Spots between have to be empty
@@ -74,7 +74,7 @@ public class King extends Piece {
 			if (board.getPieceAt(5, 7) == null && board.getPieceAt(6, 7) == null && board.getPieceAt(7, 7) != null) {
 				if (board.getPieceAt(7, 7).getClass().equals(Tower.class)) {
 					Tower t = (Tower) board.getPieceAt(7, 7);
-					if (!t.hasMoved()) {
+					if (!t.getMoved()) {
 						new Move(this, board, 6, 7, moves);
 					}
 				}
@@ -87,7 +87,7 @@ public class King extends Piece {
 				if (board.getPieceAt(0, 7).getClass().equals(Tower.class)
 						&& board.getPieceAt(0, 7).color() == PieceColor.WHITE) {
 					Tower t = (Tower) board.getPieceAt(0, 7);
-					if (!t.hasMoved()) {
+					if (!t.getMoved()) {
 						new Move(this, board, 2, 7, moves);
 					}
 				}
@@ -96,7 +96,7 @@ public class King extends Piece {
 		/*
 		 * black castling move
 		 */
-		else if (!this.hasMoved() && this.getPositionY() == 0 && this.getPoisitonX() == 4
+		else if (!this.getMoved() && this.getPositionY() == 0 && this.getPoisitonX() == 4
 				&& this.color() == PieceColor.BLACK) {
 			/*
 			 * checking black king right move
@@ -105,7 +105,7 @@ public class King extends Piece {
 				if (board.getPieceAt(7, 0).getClass().equals(Tower.class)
 						&& board.getPieceAt(7, 0).color() == PieceColor.BLACK) {
 					Tower t = (Tower) board.getPieceAt(7, 0);
-					if (!t.hasMoved()) {
+					if (!t.getMoved()) {
 						new Move(this, board, 6, 0, moves);
 					}
 				}
@@ -118,7 +118,7 @@ public class King extends Piece {
 				if (board.getPieceAt(0, 0).getClass().equals(Tower.class)
 						&& board.getPieceAt(0, 0).color() == PieceColor.BLACK) {
 					Tower t = (Tower) board.getPieceAt(0, 0);
-					if (!t.hasMoved()) {
+					if (!t.getMoved()) {
 						new Move(this, board, 2, 0, moves);
 					}
 				}
@@ -130,11 +130,11 @@ public class King extends Piece {
 	/*
 	 * used for the castling move
 	 */
-	public boolean hasMoved() {
+	public boolean getMoved() {
 		return this.moved;
 	}
 
-	public void setNotMoved() {
-		this.moved = false;
+	public void setMoved(boolean moved) {
+		this.moved = moved;
 	}
 }

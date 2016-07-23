@@ -56,12 +56,12 @@ public class Tower extends Piece {
 	/*
 	 * used for the castling move
 	 */
-	public boolean hasMoved() {
+	public boolean getMoved() {
 		return this.moved;
 	}
 
-	public void setNotMoved() {
-		this.moved = false;
+	public void setMoved(boolean moved) {
+		this.moved = moved;
 	}
 
 	/*
