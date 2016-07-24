@@ -6,7 +6,8 @@ import org.junit.runners.Suite;
 //JUnit Suite Test
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ 
-	BishopSimpleMovement.class
+	BishopSimpleMovement.class,
+	BishopApplyMove.class
 })
 
 public class BishopTestSuite {

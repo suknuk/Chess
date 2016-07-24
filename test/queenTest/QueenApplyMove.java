@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import board.Move;
 import pieces.Bishop;
+import pieces.Pawn;
 import pieces.PieceColor;
 import pieces.Queen;
 import pieces.Tower;
@@ -47,10 +48,28 @@ public class QueenApplyMove extends MainTestClass {
 		Move move = new Move(queen, board, 4, 0);
 		board.applyMove(move);
 		
-		System.out.println(board.getPieceAt(4, 0) + " " + board.getPieceAt(4, 1));
-		
 		assertEquals(null, board.getPieceAt(4, 1));
 		assertEquals(Queen.class, board.getPieceAt(4, 0).getClass());
 	}
+	
+	@Test
+	public void QueenHitEnemyApplyMove3() {
+		this.reset();
+		Queen queen = new Queen(3, 1, PieceColor.BLACK, board);
 
+		new Pawn(0, 6, PieceColor.WHITE, board);
+		new Pawn(1, 6, PieceColor.WHITE, board);
+		new Pawn(2, 6, PieceColor.WHITE, board);
+		new Pawn(3, 6, PieceColor.WHITE, board);
+		new Pawn(4, 6, PieceColor.WHITE, board);
+		new Pawn(5, 6, PieceColor.WHITE, board);
+		new Pawn(6, 6, PieceColor.WHITE, board);
+		new Pawn(7, 6, PieceColor.WHITE, board);
+
+		Move move = new Move(queen, board, 3, 6);
+		board.applyMove(move);
+		
+		assertEquals(null, board.getPieceAt(3, 1));
+		assertEquals(Queen.class, board.getPieceAt(3, 6).getClass());
+	}
 }

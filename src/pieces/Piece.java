@@ -42,7 +42,6 @@ public abstract class Piece implements PieceInterface {
 	 */
 	@Override
 	public void setPosition(int x, int y){
-		System.out.println("wtf");
 		this.posX = x;
 		this.posY = y;
 	}

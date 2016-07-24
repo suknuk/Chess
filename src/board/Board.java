@@ -153,7 +153,6 @@ public class Board {
 		 * otherwise just move the piece
 		 */
 		else {
-			System.out.println("toX:" + move.toX() + ", toY:" + move.toY());
 			this.board[move.toX()][move.toY()] = this.board[move.fromX()][move.fromY()];
 
 			/*

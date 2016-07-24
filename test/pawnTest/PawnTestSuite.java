@@ -8,7 +8,8 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({ 
 	PawnSimpleMovement.class,
 	PawnStartingJump.class,
-	PawnChangesToQueen.class
+	PawnChangesToQueen.class,
+	PawnApplyMove.class
 })
 
 public class PawnTestSuite {

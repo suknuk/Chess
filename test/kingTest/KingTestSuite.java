@@ -7,7 +7,8 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ 
 	KingSimpleMovement.class,
-	KingCastling.class
+	KingCastling.class,
+	KingApplyMove.class
 })
 
 public class KingTestSuite {
