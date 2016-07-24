@@ -10,6 +10,8 @@ This program is designed to be modified by your own algorithms on chessboard eva
 
 Examples of board evaluation algorithms can be found in the ```src/chess/BoardEvaluation.java``` file. The most simple evaluation algorithm in the file simply counts the value of each piece on the board and if a player is in the 'mate' position
 
+In the same file, you will find the variables to change the value of each chess piece, if you want to modify the value.
+
 ### Move evaluation
 
 Move evaluation algorithm examples can be found in the ```src/chess/MoveEvaluation.java``` file.

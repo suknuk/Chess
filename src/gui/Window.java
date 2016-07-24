@@ -63,7 +63,7 @@ public class Window extends Applet implements Runnable, MouseListener {
 	 * board instance
 	 */
 	private Board board;
-	
+
 	/*
 	 * variable to show possible moves to a player on the board
 	 */
@@ -82,9 +82,9 @@ public class Window extends Applet implements Runnable, MouseListener {
 
 		board = new Board();
 		Chess.setupNormalMatch(board);
-		
-		board.addPiece(new Queen(4,4,PieceColor.BLACK,board));
-		
+
+		board.addPiece(new Queen(4, 4, PieceColor.BLACK, board));
+
 		possibleMoves = new ArrayList<Move>();
 
 		this.addMouseListener(this);
@@ -213,13 +213,13 @@ public class Window extends Applet implements Runnable, MouseListener {
 	/*
 	 * Method to paint possible moves on the board
 	 */
-	private void paintPossibleMoves(Graphics g){
+	private void paintPossibleMoves(Graphics g) {
 		g.setColor(Color.YELLOW);
-		for (Move mv : possibleMoves){
-			g.fillOval(mv.toX()*80+20, mv.toY()*80+20, 40, 40);
+		for (Move mv : possibleMoves) {
+			g.fillOval(mv.toX() * 80 + 20, mv.toY() * 80 + 20, 40, 40);
 		}
 	}
-	
+
 	/**
 	 * Painting the chess pieces of the board onto the board
 	 * 
@@ -266,7 +266,7 @@ public class Window extends Applet implements Runnable, MouseListener {
 							paintPiece = img_black_king;
 						}
 					}
-					g.drawImage(paintPiece, x*80+7, y*80+7, this);
+					g.drawImage(paintPiece, x * 80 + 7, y * 80 + 7, this);
 				}
 			}
 		}
@@ -276,15 +276,52 @@ public class Window extends Applet implements Runnable, MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		int clicked_x = e.getX() / 80;
 		int clicked_y = e.getY() / 80;
-		
+
 		System.out.println("Registered click at " + clicked_x + " " + clicked_y);
 
-		possibleMoves = new ArrayList<Move>();
-		if (board.getPieceAt(clicked_x, clicked_y) != null) {
-			possibleMoves.addAll(board.getPieceAt(clicked_x, clicked_y).possibleMoves(board));
-			System.out.println("Moves found :" + possibleMoves.size());
+		/*
+		 * click position must be from 0 to 7
+		 */
+		if (clicked_x >= 0 && clicked_x <= 7 && clicked_y >= 0 && clicked_y <= 7) {
+
+			if (board.getPieceAt(clicked_x, clicked_y) != null) {
+				/*
+				 * Checking if piece selected is from player who has to go next
+				 */
+				if (board.getPieceAt(clicked_x, clicked_y).color() == board.whichPlayerToGo()) {
+					possibleMoves = new ArrayList<Move>();
+					possibleMoves.addAll(board.getPieceAt(clicked_x, clicked_y).possibleMoves(board));
+					System.out.println("Moves found :" + possibleMoves.size());
+				} else {
+					System.out.println("Selected enemy piece");
+					/*
+					 * clicked on enemy piece, hit it if in the possibleMoves
+					 * list
+					 */
+					for (Move mv : possibleMoves) {
+						if (mv.toX() == clicked_x && mv.toY() == clicked_y) {
+							board.applyMove(mv);
+							board.changePlayerToGo();
+							possibleMoves = new ArrayList<Move>();
+							break;
+						}
+					}
+				}
+				/*
+				 * check if click was in the possibleMoves list and move the
+				 * selected piece if it was
+				 */
+			} else {
+				for (Move mv : possibleMoves) {
+					if (mv.toX() == clicked_x && mv.toY() == clicked_y) {
+						board.applyMove(mv);
+						board.changePlayerToGo();
+						possibleMoves = new ArrayList<Move>();
+						break;
+					}
+				}
+			}
 		}
-		
 	}
 
 	@Override

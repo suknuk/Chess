@@ -17,11 +17,25 @@ public class Board {
 	 */
 	private Piece[][] board;
 
+	/*
+	 * Variable that holds the color of the play who's turn it is
+	 */
+	private PieceColor playerToGo;
+	
+	/*
+	 * Variables that hold the flag if a player is checked
+	 */
+	private boolean whitePlayerCheck;
+	private boolean blackPlayerCheck;
+
 	/**
 	 * Board constructor
 	 */
 	public Board() {
 		this.board = new Piece[8][8];
+		playerToGo = PieceColor.WHITE;
+		this.whitePlayerCheck = false;
+		this.blackPlayerCheck = false;
 	}
 
 	/**
@@ -36,6 +50,37 @@ public class Board {
 			for (int x = 0; x <= 7; x++) {
 				this.board[x][y] = copyMe.board[x][y];
 			}
+		}
+	}
+
+	/**
+	 * @return The player who has to move next
+	 */
+	public PieceColor whichPlayerToGo() {
+		return this.playerToGo;
+	}
+
+	/**
+	 * @return True if the current play is checked. False if he is not currently checked
+	 */
+	public boolean isCurrentPlayerChecked(){
+		if (this.playerToGo == PieceColor.WHITE && this.whitePlayerCheck == true){
+			return true;
+		} else if (this.playerToGo == PieceColor.BLACK && this.blackPlayerCheck == true) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	/**
+	 * Changing the player color to the opposite player
+	 */
+	public void changePlayerToGo() {
+		if (this.playerToGo == PieceColor.WHITE) {
+			this.playerToGo = PieceColor.BLACK;
+		} else {
+			this.playerToGo = PieceColor.WHITE;
 		}
 	}
 
