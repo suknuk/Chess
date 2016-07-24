@@ -322,6 +322,7 @@ public class Window extends Applet implements Runnable, MouseListener {
 				}
 			}
 		}
+		System.out.println("White is checked : " + board.isChecked(PieceColor.WHITE) + ", black is checked : " + board.isChecked(PieceColor.BLACK));
 	}
 
 	@Override
