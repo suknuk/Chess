@@ -41,13 +41,12 @@ public abstract class Piece implements PieceInterface {
 	 * @see pieces.PieceInterface#setX(int)
 	 */
 	@Override
-	public void setX(int x){
+	public void setPosition(int x, int y){
+		System.out.println("wtf");
 		this.posX = x;
-	}
-	@Override
-	public void setY(int y){
 		this.posY = y;
 	}
+
 	/*
 	 * Getters for the position of the piece
 	 */

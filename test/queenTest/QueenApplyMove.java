@@ -50,8 +50,7 @@ public class QueenApplyMove extends MainTestClass {
 		System.out.println(board.getPieceAt(4, 0) + " " + board.getPieceAt(4, 1));
 		
 		assertEquals(null, board.getPieceAt(4, 1));
-		// getDeclaringClass since Queen uses 2 subclasses of Tower and Bishop for its moves
-		assertEquals(Queen.class, board.getPieceAt(4, 0).getClass().getDeclaringClass());
+		assertEquals(Queen.class, board.getPieceAt(4, 0).getClass());
 	}
 
 }

@@ -2,7 +2,7 @@ package chess;
 
 import board.Board;
 import board.Move;
-import pieces.King;
+import pieces.Bishop;
 import pieces.PieceColor;
 import pieces.Tower;
 
@@ -26,14 +26,15 @@ public class test {
 		
 		Board board = new Board();
 		Tower towerw = new Tower(7,7,PieceColor.WHITE,board);
-		Tower towerb = new Tower(0,7,PieceColor.BLACK,board);
+		new Bishop(7,0,PieceColor.BLACK,board);
 		
-		Move mv2 = new Move(towerw,board,0,7);
+		System.out.println("before board evaluation: " + board.getPieceAt(7,0) + " " + board.getPieceAt(7, 7) );
+		
+		Move mv2 = new Move(towerw,board,7,0);
 		board.applyMove(mv2);
 		
-		System.out.println(board.getPieceAt(0, 7));
-		System.out.println(board.getPieceAt(7, 7));
-		
+		System.out.println("after board evaluation: " + board.getPieceAt(7,0) + " " + board.getPieceAt(7, 7) );
+
 		//System.out.println(BoardEvaluation.scoreEvaluation(board, PieceColor.WHITE));
 		//System.out.println(Chess.allPossibleMoves(board, PieceColor.WHITE).size());
 	}

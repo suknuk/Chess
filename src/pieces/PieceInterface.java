@@ -35,22 +35,14 @@ public interface PieceInterface {
 	 */
 	public int pieceValue();
 
-	/*
-	 * 
-	 */
 	/**
 	 * Setting a new x position
 	 * 
 	 * @param x
 	 *            new x position
-	 */
-	public void setX(int x);
-
-	/**
-	 * Setting a new y position
-	 * 
 	 * @param y
-	 *            new x pisition
+	 *            new y position
 	 */
-	public void setY(int y);
+	public void setPosition(int x, int y);
+
 }

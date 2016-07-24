@@ -77,7 +77,7 @@ public class Board {
 	 */
 	public void applyMove(Move move) {
 		// get copy
-		Piece movingPiece = this.board[move.fromX()][move.fromY()];
+		Piece movingPiece = move.getMovingPiece();
 
 		/*
 		 * Error handling
@@ -105,6 +105,9 @@ public class Board {
 		else if (movingPiece.getClass().equals(King.class) && (Math.pow(move.toX() - move.fromX(), 2)) > 1
 				&& !((King) movingPiece).getMoved()) {
 
+			/*
+			 * y variable for the side of the castling move.
+			 */
 			int y;
 			if (movingPiece.color() == PieceColor.WHITE) {
 				y = 7;
@@ -115,12 +118,14 @@ public class Board {
 			// right castling move
 			if (move.toX() == 6 && this.getPieceAt(7, y) != null && this.getPieceAt(7, y).getClass().equals(Tower.class)
 					&& !((Tower) this.getPieceAt(7, y)).getMoved()) {
+
 				// Moving the king
 				this.board[6][y] = movingPiece;
 				((King) this.board[6][y]).setMoved(true);
 				// Moving the tower
 				this.board[5][y] = this.board[7][y];
 				((Tower) this.board[5][y]).setMoved(true);
+				((Tower) this.board[5][y]).setPosition(5, y);
 				// setting old field to null
 				this.board[7][y] = null;
 			}
@@ -134,6 +139,7 @@ public class Board {
 				// Moving the tower
 				this.board[3][y] = this.board[0][y];
 				((Tower) this.board[3][y]).setMoved(true);
+				((Tower) this.board[3][y]).setPosition(3, y);
 				// setting old field to null
 				this.board[4][y] = null;
 				this.board[0][y] = null;
@@ -147,19 +153,22 @@ public class Board {
 		 * otherwise just move the piece
 		 */
 		else {
-			System.out.println("moving piece");
-			System.out.println(this.board[move.toX()][move.toY()]);
+			System.out.println("toX:" + move.toX() + ", toY:" + move.toY());
+			this.board[move.toX()][move.toY()] = this.board[move.fromX()][move.fromY()];
 
-			// this.board[move.toX()][move.toY()] = movingPiece;
-			this.board[move.toX()][move.toY()] = null;
+			/*
+			 * Special case for towers and kings, to set the moved flat
+			 */
 
-			System.out.println(this.board[move.toX()][move.toY()]);
-
-			movingPiece.setX(move.toX());
-			movingPiece.setY(move.toY());
+			if (this.board[move.toX()][move.toY()].getClass().equals(Tower.class)) {
+				((Tower) this.board[move.toX()][move.toY()]).setMoved(true);
+			} else if (this.board[move.toX()][move.toY()].getClass().equals(King.class)) {
+				((King) this.board[move.toX()][move.toY()]).setMoved(true);
+			}
 		}
 		// destroy old copy
 		this.board[move.fromX()][move.fromY()] = null;
-		System.out.println("from " + this.board[move.fromX()][move.fromY()]);
+		// set new position to class
+		this.board[move.toX()][move.toY()].setPosition(move.toX(), move.toY());
 	}
 }
