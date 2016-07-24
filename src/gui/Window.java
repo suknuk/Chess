@@ -10,10 +10,12 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
 import board.Board;
+import board.Move;
 import chess.Chess;
 import pieces.Bishop;
 import pieces.King;
@@ -61,6 +63,11 @@ public class Window extends Applet implements Runnable, MouseListener {
 	 * board instance
 	 */
 	private Board board;
+	
+	/*
+	 * variable to show possible moves to a player on the board
+	 */
+	ArrayList<Move> possibleMoves;
 
 	@Override
 	public void init() {
@@ -75,6 +82,10 @@ public class Window extends Applet implements Runnable, MouseListener {
 
 		board = new Board();
 		Chess.setupNormalMatch(board);
+		
+		board.addPiece(new Queen(4,4,PieceColor.BLACK,board));
+		
+		possibleMoves = new ArrayList<Move>();
 
 		this.addMouseListener(this);
 	}
@@ -195,9 +206,20 @@ public class Window extends Applet implements Runnable, MouseListener {
 			flip = !flip;
 		}
 
+		paintPossibleMoves(g);
 		paintChessPieces(g);
 	}
 
+	/*
+	 * Method to paint possible moves on the board
+	 */
+	private void paintPossibleMoves(Graphics g){
+		g.setColor(Color.YELLOW);
+		for (Move mv : possibleMoves){
+			g.fillOval(mv.toX()*80+20, mv.toY()*80+20, 40, 40);
+		}
+	}
+	
 	/**
 	 * Painting the chess pieces of the board onto the board
 	 * 
@@ -252,8 +274,17 @@ public class Window extends Applet implements Runnable, MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		System.out.println("Registered click at " + (e.getX() / 80) + " " + (e.getY() / 80));
+		int clicked_x = e.getX() / 80;
+		int clicked_y = e.getY() / 80;
+		
+		System.out.println("Registered click at " + clicked_x + " " + clicked_y);
 
+		possibleMoves = new ArrayList<Move>();
+		if (board.getPieceAt(clicked_x, clicked_y) != null) {
+			possibleMoves.addAll(board.getPieceAt(clicked_x, clicked_y).possibleMoves(board));
+			System.out.println("Moves found :" + possibleMoves.size());
+		}
+		
 	}
 
 	@Override

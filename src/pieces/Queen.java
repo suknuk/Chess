@@ -44,11 +44,17 @@ public class Queen extends Piece {
 	public ArrayList<Move> possibleMoves(Board board) {
 		ArrayList<Move> moves = new ArrayList<Move>();
 
-		QueenTowerMoves qtm = new QueenTowerMoves(this.getPoisitonX(), this.getPositionY(), this.color(), board);
-		QueenBishopMoves qbm = new QueenBishopMoves(this.getPoisitonX(), this.getPositionY(), this.color(), board);
+		/*
+		 * need to make a copy of the board instance, otherwise the queen is
+		 * replace by the QueenBishopMoves class for some reason
+		 */
+		Board cloneBoard = new Board(board);
 
-		moves.addAll(qtm.possibleMoves(board));
-		moves.addAll(qbm.possibleMoves(board));
+		QueenTowerMoves qtm = new QueenTowerMoves(this.getPoisitonX(), this.getPositionY(), this.color(), cloneBoard);
+		QueenBishopMoves qbm = new QueenBishopMoves(this.getPoisitonX(), this.getPositionY(), this.color(), cloneBoard);
+
+		moves.addAll(qtm.possibleMoves(cloneBoard));
+		moves.addAll(qbm.possibleMoves(cloneBoard));
 
 		return moves;
 	}
