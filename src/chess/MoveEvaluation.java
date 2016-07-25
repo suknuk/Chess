@@ -1,5 +1,7 @@
 package chess;
 
+import java.util.ArrayList;
+
 import board.Board;
 import board.Move;
 import pieces.PieceColor;
@@ -9,6 +11,38 @@ import pieces.PieceColor;
  */
 public class MoveEvaluation {
 
+	/*
+	 * minimax evaluation method which returns the best move
+	 */
+	public Move minimax(Board board, int depth, PieceColor currentPlayer){
+		ArrayList<Move> allMoves = new ArrayList<Move>();
+		allMoves.addAll(Chess.allPossibleMoves(board, currentPlayer));
+		
+		/*
+		 * error handling: no moves possible
+		 */
+		if (allMoves.size() == 0){
+			return null;
+		}
+		
+		int curBestScore = Integer.MIN_VALUE;
+		Move bestMove = allMoves.get(0);
+		
+		/*
+		 * Iterating every move possible to find the move with the best score
+		 */
+		for (Move mv : allMoves){
+			Board tmpBoard = new Board(board);
+			tmpBoard.applyMove(mv);
+			int tmpScore = minimax(depth,true,tmpBoard,currentPlayer);
+			if (tmpScore > curBestScore){
+				bestMove = mv;
+				curBestScore = tmpScore;
+			}
+		}
+		return bestMove;
+	}
+	
 	/*
 	 * minimax evaluation, as seen here: https://en.wikipedia.org/wiki/Minimax
 	 */
