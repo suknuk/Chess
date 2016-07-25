@@ -4,6 +4,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 import bishopTest.BishopTestSuite;
+import boardTest.BoardTestSuite;
 import kingTest.KingTestSuite;
 import knightTest.KnightTestSuite;
 import pawnTest.PawnTestSuite;
@@ -18,7 +19,8 @@ import towerTest.TowerTestSuite;
 	BishopTestSuite.class,
 	QueenTestSuite.class,
 	KnightTestSuite.class,
-	KingTestSuite.class
+	KingTestSuite.class,
+	BoardTestSuite.class
 })
 
 public class JUnitTestSuite {
