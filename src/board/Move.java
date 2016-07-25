@@ -37,14 +37,16 @@ public class Move {
 			this.toX = toX;
 			this.toY = toY;
 
+			/*
 			System.out.print("New move from : " + piece.getClass() + ", from x: " + piece.getPoisitonX() + ", y: "
 					+ piece.getPositionY() + ", to x: " + toX + ", y: " + toY);
+					*/
 			/*
 			 * Moving to empty place
 			 */
 			Piece toPiece = board.getPieceAt(toX, toY);
 			if (toPiece == null) {
-				System.out.println(". Moved successfully");
+				//System.out.println(". Moved successfully");
 			}
 			/*
 			 * Moving to same color piece
@@ -56,7 +58,7 @@ public class Move {
 			 * Hitting enemy piece
 			 */
 			else if (toPiece.color() != piece.color()) {
-				System.out.println(". Enemy piece hit");
+				//System.out.println(". Enemy piece hit");
 			}
 		} else {
 			throw new java.lang.IllegalArgumentException("Trying to move out of board");

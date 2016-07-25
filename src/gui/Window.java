@@ -37,7 +37,7 @@ public class Window extends Applet implements Runnable, MouseListener {
 	private static long timeSinceLastUpdate;
 
 	public static int windowWidth = 640;
-	public static int windowHeight = 640;
+	public static int windowHeight = 680;
 
 	private Image image;
 	private Graphics second;
@@ -64,6 +64,9 @@ public class Window extends Applet implements Runnable, MouseListener {
 	 */
 	private Board board;
 
+	private boolean whiteIsChecked;
+	private boolean blackIsChecked;
+
 	/*
 	 * variable to show possible moves to a player on the board
 	 */
@@ -84,6 +87,8 @@ public class Window extends Applet implements Runnable, MouseListener {
 		Chess.setupNormalMatch(board);
 
 		board.addPiece(new Queen(4, 4, PieceColor.BLACK, board));
+		whiteIsChecked = false;
+		blackIsChecked = false;
 
 		possibleMoves = new ArrayList<Move>();
 
@@ -208,6 +213,20 @@ public class Window extends Applet implements Runnable, MouseListener {
 
 		paintPossibleMoves(g);
 		paintChessPieces(g);
+
+		/*
+		 * displaying the player to go and if someone is checked or not
+		 */
+		String displayText = board.whichPlayerToGo() + "'s turn";
+		if (blackIsChecked) {
+			displayText += ", black is checked";
+		}
+		if (whiteIsChecked) {
+			displayText += ", white is checked";
+		}
+
+		g.setColor(Color.WHITE);
+		g.drawString(displayText, 20, 660);
 	}
 
 	/*
@@ -303,6 +322,9 @@ public class Window extends Applet implements Runnable, MouseListener {
 							board.applyMove(mv);
 							board.changePlayerToGo();
 							possibleMoves = new ArrayList<Move>();
+							//this.whiteIsChecked = board.isChecked(PieceColor.WHITE);
+							//this.blackIsChecked = board.isChecked(PieceColor.BLACK);
+							this.board.verifyCheckedStatus();
 							break;
 						}
 					}
@@ -317,12 +339,17 @@ public class Window extends Applet implements Runnable, MouseListener {
 						board.applyMove(mv);
 						board.changePlayerToGo();
 						possibleMoves = new ArrayList<Move>();
+						//this.whiteIsChecked = board.isChecked(PieceColor.WHITE);
+						//this.blackIsChecked = board.isChecked(PieceColor.BLACK);
+						this.board.verifyCheckedStatus();
 						break;
 					}
 				}
 			}
 		}
-		System.out.println("White is checked : " + board.isChecked(PieceColor.WHITE) + ", black is checked : " + board.isChecked(PieceColor.BLACK));
+		this.whiteIsChecked = board.isWhiteChecked();
+		this.blackIsChecked = board.isBlackChecked();
+		System.out.println("White is checked : " + this.whiteIsChecked + ", black is checked : " + this.blackIsChecked);
 	}
 
 	@Override

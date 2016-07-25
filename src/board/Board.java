@@ -92,6 +92,20 @@ public class Board {
 	}
 
 	/**
+	 * @return true if white is checked
+	 */
+	public boolean isWhiteChecked() {
+		return this.whitePlayerCheck;
+	}
+
+	/**
+	 * @return true if black is checked
+	 */
+	public boolean isBlackChecked() {
+		return this.blackPlayerCheck;
+	}
+
+	/**
 	 * Returning status of the board
 	 * 
 	 * @return the board instance
@@ -224,49 +238,74 @@ public class Board {
 	}
 
 	/**
-	 * @param color
-	 *            Color of the player to be checked
-	 * @return True if checked, false if not
+	 * Look at every piece on the map and look if a player is checked
 	 */
-	public boolean isChecked(PieceColor color) {
+	public void verifyCheckedStatus() {
 
 		/*
-		 * Find king of color
+		 * iterate black and white
 		 */
-		for (int y = 0; y <= 7; y++) {
-			for (int x = 0; x <= 7; x++) {
-				Piece pieceat = this.getPieceAt(x, y);
-				if (pieceat != null) {
-					if (pieceat.color() == color && pieceat.getClass().equals(King.class)) {
-						King king = (King) pieceat;
+		for (PieceColor color : PieceColor.values()) {
+			/*
+			 * Find king of color
+			 */
+			outerloop: for (int y = 0; y <= 7; y++) {
+				for (int x = 0; x <= 7; x++) {
+					Piece pieceat = this.getPieceAt(x, y);
+					if (pieceat != null) {
+						if (pieceat.color() == color && pieceat.getClass().equals(King.class)) {
+							King king = (King) pieceat;
 
-						/*
-						 * search every move possible by opposing player
-						 */
-						ArrayList<Move> possibleEnemyMoves = new ArrayList<Move>();
-						for (int yy = 0; yy <= 7; yy++) {
-							for (int xx = 0; xx <= 7; xx++) {
-								if (this.getPieceAt(xx, yy) != null) {
-									if (this.getPieceAt(xx, yy).color() == PieceColor.opposite(king.color())) {
-										possibleEnemyMoves.addAll(this.getPieceAt(xx, yy).possibleMoves(this));
+							/*
+							 * search every move possible by opposing player
+							 */
+							ArrayList<Move> possibleEnemyMoves = new ArrayList<Move>();
+							for (int yy = 0; yy <= 7; yy++) {
+								for (int xx = 0; xx <= 7; xx++) {
+									if (this.getPieceAt(xx, yy) != null) {
+										if (this.getPieceAt(xx, yy).color() == PieceColor.opposite(king.color())) {
+											possibleEnemyMoves.addAll(this.getPieceAt(xx, yy).possibleMoves(this));
+										}
 									}
 								}
 							}
-						}
-						
-						/*
-						 * now look through every move if king can be hit by the move
-						 */
-						for (Move mv : possibleEnemyMoves){
-							if (mv.toX() == king.getPoisitonX() && mv.toY() == king.getPositionY()){
-								return true;
+
+							/*
+							 * now look through every move if king can be hit by
+							 * the move
+							 */
+							for (Move mv : possibleEnemyMoves) {
+								if (mv.toX() == king.getPoisitonX() && mv.toY() == king.getPositionY()) {
+
+									// return true;
+									/*
+									 * player is checked
+									 */
+									if (color == PieceColor.WHITE) {
+										whitePlayerCheck = true;
+									}
+									if (color == PieceColor.BLACK) {
+										blackPlayerCheck = true;
+									}
+									System.out.println("WTF! " + this.whitePlayerCheck + " " + this.blackPlayerCheck);
+									break outerloop;
+								}
+							}
+							/*
+							 * king of color is not checked when we reach this
+							 * part of the code
+							 */
+							if (color == PieceColor.WHITE) {
+								whitePlayerCheck = false;
+							}
+							if (color == PieceColor.BLACK) {
+								blackPlayerCheck = false;
 							}
 						}
-
 					}
 				}
 			}
 		}
-		return false;
+		// return false;
 	}
 }
