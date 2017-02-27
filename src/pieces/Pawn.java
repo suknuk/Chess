@@ -31,13 +31,13 @@ public class Pawn extends AbstractPiece {
 
 		// check before piece
 		if (board.getPieceAt(x, y + direction) == null) {
-			Move move = new Move(x, y + direction);
+			moves.add(new Move(x, y + direction));
 		}
 
 		// if piece did not yet move, it can jump
 		if (!this.hasPieceMoved()) {
 			if (board.getPieceAt(x, y + 2 * direction) == null) {
-				Move move = new Move(x, y + 2 * direction);
+				moves.add(new Move(x, y + 2 * direction));
 			}
 		}
 
