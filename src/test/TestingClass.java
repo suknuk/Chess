@@ -13,9 +13,7 @@ public class TestingClass {
 		Board b = new Board();
 		Pawn p = new Pawn(PieceColor.BLACK);
 		
-		b.board[0][0] = p;
-		
-		System.out.println(b.board[0][0] + " " + b.board[1][0]);
+
 
 	}
 
